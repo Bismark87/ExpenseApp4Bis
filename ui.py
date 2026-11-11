@@ -13,21 +13,22 @@ class ExpenseUI:
     def run(self):
 
         while True:
-            print("\n1. Add Expensee")
+            print("\nExpensee Tracker")
+            print("1.add expenses")
             print("2. view expenses")
             print("3. filter expenses")
-            print("4. save JSON")
-            print("5. open JSON")
+            print("4. save expenses")
+            print("5. open expenses")
             print("6. export CSV")
             print("7. exit")
 
             choice = input("Choose: ")
 
             if choice == "1":
-                date = input("Date: ")
-                category = input("Category: ")
-                description = input("Description: ")
-                amount = float(input("Amount: "))
+                date = input("enter date: ")
+                category = input("enter category: ")
+                description = input("enter description: ")
+                amount = float(input("enter amount: "))
                 new_expense = expense.create_expense(
                     date, category, description, amount)
                 expensemanager.add_expense(
@@ -47,15 +48,15 @@ class ExpenseUI:
                     print(item)
 
             elif choice == "4":
-                filename = input("Filename: ")
+                filename = input("enter json filename: ")
                 file.save_expenses(self.expenses, filename)
 
             elif choice == "5":
-                filename = input("Filename: ")
+                filename = input("enter json filename: ")
                 self.expenses = file.open_expenses(filename)
 
             elif choice == "6":
-                filename = input("Filename: ")
+                filename = input("enter CSV filename: ")
                 with open(filename, 'w', newline='') as csvfile:
                     writer = csv.writer(csvfile)
                     writer.writerow(["Date", "Category", "Description", "Amount"])
