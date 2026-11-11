@@ -43,7 +43,7 @@ class ExpenseUI:
                 start = input("Start date: ")
                 end = input("End date: ")
                 category = input("Category: ")
-                results = expensefilter.filter_expenses(
+                results = expensefilter.(
                     self.expenses, start, end, category)
                 for item in results:
                     print(item)
