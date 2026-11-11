@@ -2,7 +2,7 @@
 
 
 
-def filter_expenses(expenses, start_date, end_date, category):
+def expensefilter(expenses, start_date, end_date, category):
 
     results = []
 
