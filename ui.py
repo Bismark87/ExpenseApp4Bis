@@ -84,4 +84,16 @@ class ExpenseUI:
       self.expenses = file_handler.open_expenses(filename)
         print("Expenses opened successfully!")     
 
+    def show_menu(self):
+        print("\n======")
+        print("     EXPENSE TRACKER")
+        print("=======")
+        print("1. Add Expense")
+        print("2. View Expenses")
+        print("3. Filter Expenses")
+        print("4. Save Expenses to JSON")
+        print("5. Open Expenses from JSON")
+        print("6. Export Expenses to CSV")
+        print("7. Exit")
+        print("========")
         
