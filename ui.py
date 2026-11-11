@@ -44,11 +44,9 @@ class ExpenseUI:
                 print("-----")
 
             total = expense_manager.get_total(self.expenses)
+              print("Total Expenses: $", total)
 
-            print("Total Expenses: $", total)
-
-
-    def filter_expenses(self):
+     def filter_expenses(self):
 
         print("\nFILTER EXPENSES")
          start_date = input("Enter start date or press Enter to skip: ")
@@ -60,13 +58,21 @@ class ExpenseUI:
             end_date,
             category
         )
-        print("\nFILTER RESULTS")
+        print("\nFilter Results")
          if len(results) == 0:
           print("No matching expenses found.")
       else:
             for item in results:
-              print("--------------------")
+              print("--------")
               print("Date:", item["date"])
               print("Category:", item["category"])
               print("Description:", item["description"])
             print("Amount: $", item["amount"])
+
+     def save_expenses(self):
+         print("\nSave Expenses")
+           filename = input("Enter filename (expenses.json): ")
+             file_handler.save_expenses(
+            self.expenses, filename
+        )
+          print("Expenses saved successfully!")
