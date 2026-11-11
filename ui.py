@@ -11,18 +11,12 @@ class ExpenseUI:
 
         self.expenses = []
 
-
-
-    def add_expense(self):
+     def add_expense(self):
 
         print("\nADD EXPENSE")
-
         date = input("Enter date (YYYY-MM-DD): ")
-
         category = input("Enter category: ")
-
         description = input("Enter description: ")
-
         amount = float(input("Enter amount: "))
 
         new_expense = expense.create_expense(
@@ -34,3 +28,45 @@ class ExpenseUI:
         )
 
         print("Expense added successfully!")
+
+
+    def view_expenses(self):
+
+        print("\nALL EXPENSES")
+        if len(self.expenses) == 0:
+        print("No expenses found.")
+     else:
+          for item in self.expenses:
+                print("-----") print("Date:", item["date"])
+                print("Category:", item["category"])
+                print("Description:", item["description"])
+                print("Amount: $", item["amount"])
+                print("-----")
+
+            total = expense_manager.get_total(self.expenses)
+
+            print("Total Expenses: $", total)
+
+
+    def filter_expenses(self):
+
+        print("\nFILTER EXPENSES")
+         start_date = input("Enter start date or press Enter to skip: ")
+         end_date = input("Enter end date or press Enter to skip: ")
+        category = input("Enter category or press Enter to skip: ")
+          results = expense_filter.filter_expenses(
+            self.expenses,
+            start_date,
+            end_date,
+            category
+        )
+        print("\nFILTER RESULTS")
+         if len(results) == 0:
+          print("No matching expenses found.")
+      else:
+            for item in results:
+              print("--------------------")
+              print("Date:", item["date"])
+              print("Category:", item["category"])
+              print("Description:", item["description"])
+            print("Amount: $", item["amount"])
