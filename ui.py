@@ -1,99 +1,91 @@
 
-
-import expense  import expense_manager
-import expensefilter  import file
+import expense
+import expensemanager
+import expensefilter
+import file
 import csv
 
 
 class ExpenseUI:
 
     def __init__(self):
-
         self.expenses = []
 
-     def add_expense(self):
+    def run(self):
 
-        print("\nADD EXPENSE")
-        date = input("Enter date (YYYY-MM-DD): ")
-        category = input("Enter category: ")
-        description = input("Enter description: ")
-        amount = float(input("Enter amount: "))
+        while True:
 
-        new_expense = expense.create_expense(
-            date, category, description, amount
-        )
+            print("\n--- Expense Tracker ---")
+            print("1. Add Expense")
+            print("2. View Expenses")
+            print("3. Filter Expenses")
+            print("4. Save Expenses")
+            print("5. Open Expenses")
+            print("6. Export to CSV")
+            print("7. Exit")
 
-        expense_manager.add_expense(
-            self.expenses, new_expense
-        )
+            choice = input("Enter choice: ")
 
-        print("Expense added successfully!")
+            if choice == "1":
 
+                date = input("Date (YYYY-MM-DD): ")
+                category = input("Category: ")
+                description = input("Description: ")
+                amount = float(input("Amount: "))
 
-    def view_expenses(self):
+                new_expense = expense.create_expense(
+                    date, category, description, amount
+                )
 
-        print("\nALL EXPENSES")
-        if len(self.expenses) == 0:
-        print("No expenses found.")
-     else:
-          for item in self.expenses:
-                print("-----") print("Date:", item["date"])
-                print("Category:", item["category"])
-                print("Description:", item["description"])
-                print("Amount: $", item["amount"])
-                print("-----")
+                expensemanager.add_expense(
+                    self.expenses, new_expense
+                )
 
-            total = expense_manager.get_total(self.expenses)
-              print("Total Expenses: $", total)
+                print("Expense added!")
 
-     def filter_expenses(self):
+            elif choice == "2":
 
-        print("\nFILTER EXPENSES")
-         start_date = input("Enter start date or press Enter to skip: ")
-         end_date = input("Enter end date or press Enter to skip: ")
-        category = input("Enter category or press Enter to skip: ")
-          results = expense_filter.filter_expenses(
-            self.expenses,
-            start_date,
-            end_date,
-            category
-        )
-        print("\nFilter Results")
-         if len(results) == 0:
-          print("No matching expenses found.")
-      else:
-            for item in results:
-              print("--------")
-              print("Date:", item["date"])
-              print("Category:", item["category"])
-              print("Description:", item["description"])
-            print("Amount: $", item["amount"])
+                for item in self.expenses:
+                    print(item)
 
-     def save_expenses(self):
-         print("\nSave Expenses")
-           filename = input("Enter filename (expenses.json): ")
-             file_handler.save_expenses(
-            self.expenses, filename
-        )
-          print("Expenses saved successfully!")
+                print("Total: $", expensemanager.get_total(self.expenses))
 
-     
-     def open_expenses(self):
-     print("\nOpen Expenses")
-     filename = input("Enter filename (expenses.json): ")
-      self.expenses = file_handler.open_expenses(filename)
-        print("Expenses opened successfully!")     
+            elif choice == "3":
 
-    def show_menu(self):
-        print("\n======")
-        print("     EXPENSE TRACKER")
-        print("=======")
-        print("1. Add Expense")
-        print("2. View Expenses")
-        print("3. Filter Expenses")
-        print("4. Save Expenses to JSON")
-        print("5. Open Expenses from JSON")
-        print("6. Export Expenses to CSV")
-        print("7. Exit")
-        print("========")
-        
+                start = input("Start date: ")
+                end = input("End date: ")
+                category = input("Category: ")
+
+                results = expensefilter.filter_expenses(
+                    self.expenses, start, end, category
+                )
+
+                for item in results:
+                    print(item)
+
+            elif choice == "4":
+
+                filename = input("JSON filename: ")
+                file.save_expenses(self.expenses, filename)
+                print("Expenses saved!")
+
+            elif choice == "5":
+
+                filename = input("JSON filename: ")
+                self.expenses = file.open_expenses(filename)
+                print("Expenses opened!")
+
+            elif choice == "6":
+
+                filename = input("CSV filename: ")
+                file.export_expenses(self.expenses, filename)
+                print("CSV exported!")
+
+            elif choice == "7":
+
+                print("Goodbye!")
+                break
+
+            else:
+
+                print("Invalid choice!")
