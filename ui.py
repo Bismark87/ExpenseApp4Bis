@@ -76,3 +76,12 @@ class ExpenseUI:
             self.expenses, filename
         )
           print("Expenses saved successfully!")
+
+     
+     def open_expenses(self):
+     print("\nOpen Expenses")
+     filename = input("Enter filename (expenses.json): ")
+      self.expenses = file_handler.open_expenses(filename)
+        print("Expenses opened successfully!")     
+
+        
