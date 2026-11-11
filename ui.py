@@ -5,7 +5,6 @@ import expensefilter
 import file
 import csv
 
-
 class ExpenseUI:
 
     def __init__(self):
@@ -14,20 +13,18 @@ class ExpenseUI:
     def run(self):
 
         while True:
+           print("\n--- Expense Tracker ---")
+        print("1. Add Expense")
+        print("2. View Expenses")
+        print("3. Filter Expenses")
+        print("4. Save Expenses")
+        print("5. Open Expenses")
+        print("6. Export to CSV")
+        print("7. Exit")
 
-            print("\n--- Expense Tracker ---")
-            print("1. Add Expense")
-            print("2. View Expenses")
-            print("3. Filter Expenses")
-            print("4. Save Expenses")
-            print("5. Open Expenses")
-            print("6. Export to CSV")
-            print("7. Exit")
+     choice = input("Enter choice: ")
 
-            choice = input("Enter choice: ")
-
-            if choice == "1":
-
+        if choice == "1":
                 date = input("Date (YYYY-MM-DD): ")
                 category = input("Category: ")
                 description = input("Description: ")
